@@ -6,11 +6,13 @@
 //--------------------------------------------------------------------
 
 int main() {
-	GameWindow* window = new GameWindow();
+	GameWindow* window = GameWindow::getInstance();
+	GraphicHandler* graphic = GraphicHandler::getInstance();
 
 	window->createWindow();
-	//	Define Direct3D 9.
-	//IDirect3D9* direct3D9 = Direct3DCreate9(D3D_SDK_VERSION);
+
+	graphic->initialize();
+	graphic->draw();
 
 	while (window->loop())
 	{
@@ -18,8 +20,11 @@ int main() {
 
 	}
 
+	graphic->clear();
 	window->removeWindow();
-	delete window;
+
+	window->releaseInstance();
+	graphic->releaseInstance();
 
 	return 0;
 }

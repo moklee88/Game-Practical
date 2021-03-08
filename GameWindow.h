@@ -1,22 +1,26 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#include "GraphicHandler.h"
 #include<d3d9.h>
-#include"GraphicHandler.h"
 
 class GameWindow
 {
 private:
-	HWND g_hWnd;
-	WNDCLASS wndClass;
+	static GameWindow* sInstance;
+	
+
 	HINSTANCE hInstance;
 
-	GraphicHandler* render;
-
 public:
+	WNDCLASS wndClass;
+	HWND g_hWnd;
+
 	GameWindow();
-	WNDCLASS getWndClass();
-	HWND getGHWnd();
+	
+	static GameWindow* getInstance();
+	static void releaseInstance();
+
 	int createWindow();
 	void removeWindow();
 	bool loop();

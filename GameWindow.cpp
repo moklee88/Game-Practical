@@ -2,10 +2,27 @@
 #include "resource.h"
 #include <stdio.h>
 
+GameWindow* GameWindow::sInstance = NULL;
+
+GameWindow* GameWindow::getInstance() {
+	if (sInstance == NULL)
+		sInstance = new GameWindow;
+
+	return sInstance;
+}
+
+void GameWindow::releaseInstance() {
+	if (sInstance != NULL) {
+		delete sInstance;
+		sInstance = NULL;
+	}
+}
+
 GameWindow::GameWindow() {
 	this->hInstance = GetModuleHandle(NULL);
 	this->g_hWnd = NULL;
 	ZeroMemory(&this->wndClass, sizeof(this->wndClass));
+
 }
 
 //	Window Procedure, for event handling
@@ -34,15 +51,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	}
 	return 0;
 }
-
-WNDCLASS GameWindow::getWndClass() {
-	return wndClass;
-}
-
-HWND GameWindow::getGHWnd() {
-	return g_hWnd;
-}
-
 int GameWindow::createWindow() {
 
 	/*
@@ -76,17 +84,14 @@ int GameWindow::createWindow() {
 	g_hWnd = CreateWindowEx(0, wndClass.lpszClassName, "My Window's Name", WS_OVERLAPPEDWINDOW, 0, 100, 400, 300, NULL, NULL, hInstance, NULL);
 	ShowWindow(g_hWnd, 1);
 
-	render = new GraphicHandler(&wndClass);
-
-	render->initialize(g_hWnd);
-
 	return 0;
 }
 
 void GameWindow::removeWindow() {
 	//	Free up the memory.
-	UnregisterClass(wndClass.lpszClassName, hInstance);
 
+	UnregisterClass(wndClass.lpszClassName, hInstance);
+	
 }
 
 bool GameWindow::loop() {
@@ -103,9 +108,7 @@ bool GameWindow::loop() {
 		DispatchMessage(&msg);
 	}
 
-	/*
-		Write your code here...
-	*/
+	//graphic section
 
 	//}
 	if (msg.message != WM_QUIT) {
