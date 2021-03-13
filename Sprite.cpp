@@ -6,7 +6,8 @@ Sprite::Sprite()
 	this->texture = NULL;
 	this->sprite = NULL;
 	this->spriteRect = { 0,0,0,0 };
-
+	this->hr = D3DXCreateSprite(GraphicHandler::getInstance()->getD3dDevice(), &sprite);
+	this->hr = D3DXCreateTextureFromFile(GraphicHandler::getInstance()->getD3dDevice(), "01.bmp", &texture);
 }
 
 
@@ -21,11 +22,6 @@ void Sprite::setPosition()
 	this->spriteRect.right = this->spriteRect.bottom = 32;
 }
 
-void Sprite::initialize()
-{
-	this->hr = D3DXCreateSprite(GraphicHandler::getInstance()->getD3dDevice(), &sprite);
-	this->hr = D3DXCreateTextureFromFile(GraphicHandler::getInstance()->getD3dDevice(), "01.bmp", &texture);
-}
 
 void Sprite::drawSprite()
 {

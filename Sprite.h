@@ -15,7 +15,6 @@ public:
 	RECT getPosition();
 	void setPosition();
 
-	void initialize();
 	void drawSprite();
 	void clear();
 
