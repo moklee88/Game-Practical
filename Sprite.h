@@ -16,6 +16,6 @@ public:
 	void setPosition();
 
 	void drawSprite();
-	void clear();
+	void release();
 
 };

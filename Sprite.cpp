@@ -41,7 +41,7 @@ void Sprite::drawSprite()
 	//	End and present scene
 }
 
-void Sprite::clear()
+void Sprite::release()
 {
 	sprite->Release();
 	sprite = NULL;
