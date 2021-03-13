@@ -24,6 +24,12 @@ void GraphicHandler::releaseInstance() {
 	}
 }
 
+IDirect3DDevice9* GraphicHandler::getD3dDevice()
+{
+	return d3dDevice;
+}
+
+
 void GraphicHandler::initialize() {
 	d3dPP.Windowed = true;
 	d3dPP.SwapEffect = D3DSWAPEFFECT_DISCARD;
