@@ -1,6 +1,6 @@
-//	Ask the compiler to include minimal header files for our program.
 #define WIN32_LEAN_AND_MEAN
 #include "GameWindow.h"
+#include "Sprite.h"
 #include <stdio.h>
 
 //--------------------------------------------------------------------
@@ -8,6 +8,8 @@
 int main() {
 	GameWindow* window = GameWindow::getInstance();
 	GraphicHandler* graphic = GraphicHandler::getInstance();
+
+	Sprite dummy;
 
 	window->createWindow();
 
@@ -20,7 +22,7 @@ int main() {
 
 	}
 
-	graphic->clear();
+	graphic->release();
 	window->removeWindow();
 
 	window->releaseInstance();

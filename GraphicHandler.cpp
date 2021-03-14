@@ -1,5 +1,4 @@
 #include "GraphicHandler.h"
-#include "Windows.h"
 
 GraphicHandler* GraphicHandler::sInstance = NULL;
 
